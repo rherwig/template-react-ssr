@@ -1,0 +1,9 @@
+# IntelliJ
+.idea
+
+# NodeJS
+node_modules
+
+# Project
+public/**.json
+public/assets
