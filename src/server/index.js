@@ -3,33 +3,18 @@ import ReactDOM from 'react-dom/server';
 import { flushChunkNames } from 'react-universal-component/server';
 import flushChunks from 'webpack-flush-chunks';
 
+import PageStart from './partials/_start.html';
+import PageEnd from './partials/_end.html';
 import App from '../shared/App';
 
-const getPageStart = (styles) => `
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+const getPageStart = (styles) => PageStart.replace(
+    '%styles%',
+    styles.map(file => `<link rel="preload" href="${file}" as="style" media="screen" onload="this.rel='stylesheet'"/>`)
+);
 
-    ${styles}
+const getPageEnd = (cssHash, js) => PageEnd.replace('%cssHash%', cssHash).replace('%js%', js);
 
-    <title>React 16 | Sample</title>
-</head>
-<body>
-
-`;
-
-const getPageEnd = (cssHash, js) => `
-${cssHash}
-${js}
-
-</body>
-</html>
-`;
-
-/**
+/**\
  * Provides the server side rendered app. In development environment, this method is called by
  * `react-hot-server-middleware`.
  *
@@ -38,9 +23,9 @@ ${js}
 export default ({ clientStats }) => async (req, res, next) => {
     const stream = ReactDOM.renderToNodeStream(<App/>);
     const chunkNames = flushChunkNames();
-    const { js, styles, cssHash } = flushChunks(clientStats, { chunkNames });
+    const { js, stylesheets, cssHash } = flushChunks(clientStats, { chunkNames });
 
-    res.write(getPageStart(styles));
+    res.write(getPageStart(stylesheets));
     res.write('<div id="react-root">');
     stream.pipe(res, { end: false });
     stream.on('end', () => {

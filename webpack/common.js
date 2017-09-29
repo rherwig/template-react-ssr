@@ -16,6 +16,15 @@ module.exports = {
         rules: [{
             test: /\.js$/,
             use: 'babel-loader'
+        }, {
+            test: /\.(png|ico|xml|json)$/,
+            use: {
+                loader: 'file-loader',
+                options: {
+                    name: '[path][name].[ext]',
+                    context: join(__dirname, '../src/shared/assets')
+                }
+            }
         }]
     }
 };

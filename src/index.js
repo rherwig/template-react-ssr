@@ -1,5 +1,7 @@
 import express from 'express';
 import { join } from 'path';
+import { readFileSync } from 'fs';
+import https from 'https';
 import { log } from 'winston';
 
 /**
@@ -25,8 +27,6 @@ const configureDevelopment = app => {
     app.use(require('webpack-hot-server-middleware')(multiCompiler, {
         serverRendererOptions: { outputPath }
     }));
-
-    app.set('views', join(__dirname, '../public/views'));
 };
 
 /**
@@ -47,8 +47,6 @@ const configureProduction = app => {
         clientStats,
         outputPath
     }));
-
-    app.set('views', join(__dirname, 'views'));
 };
 
 const app = express();
@@ -60,8 +58,6 @@ if (process.env.NODE_ENV === 'development') {
     configureProduction(app);
 }
 
-log('info', 'Configuring server engine...');
-app.set('view engine', 'ejs');
 app.set('port', process.env.PORT || 3000);
 
 app.listen(app.get('port'), () => log('info', `Server listening on port ${app.get('port')}...`));

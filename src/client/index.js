@@ -1,7 +1,12 @@
 import React from 'react';
 import { hydrate } from 'react-dom';
+import serviceWorker from 'serviceworker-webpack-plugin/lib/runtime';
 
 import App from '../shared/App';
+
+if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+    serviceWorker.register();
+}
 
 const render = Component => {
     hydrate(

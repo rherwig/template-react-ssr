@@ -1,21 +1,24 @@
 const merge = require('webpack-merge');
-const webpack = require('webpack');
 const common = require('./common');
-const join = require('path').join;
+const webpack = require('webpack');
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
+const StatsWebpackPlugin = require('stats-webpack-plugin');
 const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
+const join = require('path').join;
 
 module.exports = merge(common, {
     name: 'client',
     target: 'web',
+    devtool: 'source-map',
     entry: [
-        'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=false&quiet=false&noInfo=false',
         join(__dirname, '../src/client/index')
     ],
-    devtool: 'inline-source-map',
     output: {
         filename: 'app.client.js',
         chunkFilename: '[name].js'
+    },
+    resolve: {
+        extensions: ['.js']
     },
     module: {
         rules: [{
@@ -37,16 +40,16 @@ module.exports = merge(common, {
     plugins: [
         new ExtractCssChunks(),
         new webpack.optimize.CommonsChunkPlugin({
-            names: ['bootstrap'], // needed to put webpack bootstrap code before chunks
+            names: ['bootstrap'],
             filename: '[name].js',
             minChunks: Infinity
         }),
+        new StatsWebpackPlugin('stats.json'),
         new webpack.DefinePlugin({
             'process.env': {
-                NODE_ENV: JSON.stringify('development')
+                NODE_ENV: JSON.stringify('production')
             }
         }),
-        new webpack.HotModuleReplacementPlugin(),
         new ServiceWorkerWebpackPlugin({
             entry: join(__dirname, '../src/client/pwa/service-worker.js')
         })

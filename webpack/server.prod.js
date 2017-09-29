@@ -1,6 +1,7 @@
 const merge = require('webpack-merge');
-const webpack = require('webpack');
 const common = require('./common');
+const webpack = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const join = require('path').join;
 const nodeExternals = require('../scripts/node-externals');
 
@@ -8,18 +9,21 @@ module.exports = merge(common, {
     name: 'server',
     target: 'node',
     externals: nodeExternals,
+    devtool: 'source-map',
     entry: [
         'babel-polyfill',
         join(__dirname, '../src/server/index')
     ],
-    devtool: 'inline-source-map',
     output: {
         filename: 'app.server.js',
         libraryTarget: 'commonjs2'
     },
+    resolve: {
+        extensions: ['.js']
+    },
     module: {
         rules: [{
-            test: /\.styl/,
+            test: /\.styl$/,
             exclude: /node_modules/,
             use: [{
                 loader: 'css-loader/locals',
@@ -33,19 +37,27 @@ module.exports = merge(common, {
         }, {
             test: /\.html$/,
             exclude: /node_modules/,
-            use: {
-                loader: 'html-loader'
-            }
+            use: [{
+                loader: 'html-loader',
+                options: {
+                    attrs: [':src', ':href'],
+                    minimize: true
+                }
+            }]
         }]
     },
     plugins: [
-        new webpack.DefinePlugin({
-            'process.env': {
-                'NODE_ENV': JSON.stringify('development')
-            }
-        }),
+        new CopyWebpackPlugin([{
+            from: join(__dirname, '../package.json'),
+            to: join(__dirname, '../public/package.json')
+        }]),
         new webpack.optimize.LimitChunkCountPlugin({
             maxChunks: 1
+        }),
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: JSON.stringify('production')
+            }
         })
     ]
 });
