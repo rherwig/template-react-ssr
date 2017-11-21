@@ -9,9 +9,11 @@ import App from '../shared/App';
  * Provides the server side rendered app. In development environment, this method is called by
  * `react-hot-server-middleware`.
  *
+ * This method renders the ejs template `public/views/index.ejs`.
+ *
  * @param clientStats Parameter passed by hot server middleware
  */
-export default ({ clientStats }) => async (req, res, next) => {
+export default ({ clientStats }) => async (req, res) => {
     const app = (
         <App/>
     );
