@@ -2,11 +2,26 @@
 This project provides a template for React 16 (Fiber) using server
 side rendering.
 
+*Important:* The master branch is only supposed to contain the bare-bone template.
+There are different branches containing more advanced features, like streaming and 
+more to come in the future. Those are documentented in the Branches section.
+
 ## Features
 * Content served by ExpressJS using the EJS view engine
 * Hot reloading of styles and scripts
 * ESNext ready
 * powered by webpack
+
+## Branches
+The following, more advanced, features are pushed to dedicated branches. 
+Either checkout a specific branch or fork the repository and merge the branches to 
+get the features you need. You might as well just use them as a resource to learn, how
+the specific technologies are implemented.
+
+### Streaming (feature/streaming)
+Since React 16, we have the possibility to render to a node stream. This improves the time to first byte (TTBF), 
+since the browser can display the app in an iterative manner. The dedicated branch provides the basic streaming 
+implementation.
 
 ## Development
 To start development, follow these steps:
