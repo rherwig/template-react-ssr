@@ -15,7 +15,7 @@ import App from '../shared/App';
 const render = Component => {
     hydrate(
     	<Router>
-        	<Component/>
+            <Component/>
         </Router>,
         document.getElementById('react-root')
     );
