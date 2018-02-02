@@ -30,6 +30,8 @@
     "express": "^4.16.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
     "react-universal-component": "^2.5.5",
     "webpack-flush-chunks": "^1.1.23",
     "winston": "^2.3.1"
