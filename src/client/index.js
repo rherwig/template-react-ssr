@@ -1,8 +1,6 @@
 import React from 'react';
 import { hydrate } from 'react-dom';
 
-import { BrowserRouter as Router } from 'react-router-dom';
-
 import App from '../shared/App';
 
 /**
@@ -14,9 +12,7 @@ import App from '../shared/App';
  */
 const render = Component => {
     hydrate(
-    	<Router>
-            <Component/>
-        </Router>,
+        <Component/>,
         document.getElementById('react-root')
     );
 };
