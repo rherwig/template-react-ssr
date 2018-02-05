@@ -23,11 +23,15 @@ Since React 16, we have the possibility to render to a node stream. This improve
 since the browser can display the app in an iterative manner. The dedicated branch provides the basic streaming 
 implementation.
 
-### React-Router Integration(feature/react-router)
+### React-Router Integration (feature/react-router)
 For a template using [react-router](https://github.com/ReactTraining/react-router) you can make use of this branch.
 It features routing on client and server side as well as basic routes.
 
 Thanks to [@crabbits](https://github.com/crabbits) for contributing this example.
+
+### Express Routing / API (feature/express-routing)
+This example shows how to configure routing ExpressJS. This can be used to create
+an API to work alongside your frontend application.
 
 ## Development
 To start development, follow these steps:
