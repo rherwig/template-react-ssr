@@ -33,6 +33,11 @@ Thanks to [@crabbits](https://github.com/crabbits) for contributing this example
 This example shows how to configure routing ExpressJS. This can be used to create
 an API to work alongside your frontend application.
 
+### Redux (feature/redux)
+This example shows how to integrate [redux](https://redux.js.org) along with server-side rendering
+as well as hot-reloading. It features a simple store with preloaded state
+from the server as well as state hydration on the client.
+
 ## Development
 To start development, follow these steps:
 
