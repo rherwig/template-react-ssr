@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "presets": [
     ["@babel/preset-env", {
       "targets": {
@@ -18,4 +19,8 @@
     "@babel/plugin-syntax-dynamic-import",
     "universal-import"
   ]
+=======
+  "presets": ["env", "stage-0", "react"],
+  "plugins": ["transform-decorators-legacy"]
+>>>>>>> implements most basic redux example using ssr
 }
