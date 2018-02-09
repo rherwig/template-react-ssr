@@ -1,7 +1,12 @@
 import React from 'react';
 import { hydrate } from 'react-dom';
+import { Provider } from 'react-redux';
 
 import App from '../shared/App';
+import configureStore from '../shared/core/configure-store';
+
+const store = configureStore(window.__PRELOADED_STATE__);
+delete window.__PRELOADED_STATE__;
 
 /**
  * Renders a react component into the #react-root div container.
@@ -12,7 +17,9 @@ import App from '../shared/App';
  */
 const render = Component => {
     hydrate(
-        <Component/>,
+        <Provider store={store}>
+            <Component/>
+        </Provider>,
         document.getElementById('react-root')
     );
 };
