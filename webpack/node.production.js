@@ -5,6 +5,7 @@ const join = require('path').join;
 const extendedNodeExternals = require('../scripts/extended-node-externals');
 
 module.exports = merge(common, {
+    mode: 'production',
     target: 'node',
     externals: extendedNodeExternals,
     node: {
@@ -18,12 +19,5 @@ module.exports = merge(common, {
     output: {
         filename: 'index.js',
         path: join(__dirname, '../public'),
-    },
-    plugins: [
-        new webpack.DefinePlugin({
-            'process.env': {
-                'NODE_ENV': JSON.stringify('production')
-            }
-        })
-    ]
+    }
 });

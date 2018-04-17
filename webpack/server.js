@@ -5,6 +5,7 @@ const join = require('path').join;
 const nodeExternals = require('../scripts/node-externals');
 
 module.exports = merge(common, {
+    mode: 'development',
     name: 'server',
     target: 'node',
     externals: nodeExternals,
@@ -32,11 +33,6 @@ module.exports = merge(common, {
         }]
     },
     plugins: [
-        new webpack.DefinePlugin({
-            'process.env': {
-                'NODE_ENV': JSON.stringify('development')
-            }
-        }),
         new webpack.optimize.LimitChunkCountPlugin({
             maxChunks: 1
         })

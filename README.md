@@ -4,10 +4,25 @@ side rendering.
 
 *Important:* The master branch is only supposed to contain the bare-bone template.
 There are different branches containing more advanced features, like streaming and 
-more to come in the future. Those are documentented in the Branches section.
+more to come in the future. Those are documented in the Branches section.
+
+## Table of contents
+
+* [Features](#features)
+* [Branches](#branches)
+    * [Streaming](#streaming-(feature/streaming))
+    * [React Router](#react-router-integration-(feature/react-router))
+    * [Express Routing](#express-routing-/-api-(feature/express-routing))
+    * [Redux](#redux-(feature/redux))
+* [Development](#development)
+* [Building for production](#building-for-production)
+* [Changelog](#changelog)
+* [Planned features](#planned-features)
+* [License](#license)
+* [Contributing](#contributing)
 
 ## Features
-* Content served by ExpressJS using the EJS view engine
+* Universal rendering using ExpressJS and EJS
 * Hot reloading of styles and scripts
 * ESNext ready
 * powered by webpack
@@ -70,6 +85,26 @@ $ node public/index
 
 This bundles and optimizes your app and runs it from the `public/`
 directory.
+
+## Changelog
+The following changes have been implemented in the course of developing
+the template.
+
+### 2.0.0
+* Upgraded to webpack 4
+* Upgraded to React 16.3
+* Removed extract-css-chunks plugin in favor of extract-text-webpack-plugin,
+since the former is not supported with webpack 4 anymore
+* Removes extract plugins for styles in development, to improve hot-reloading 
+
+## Planned features
+The following features are planned for future upgrades of the template.
+If there are any request, feel free to open an issue or a pull request.
+
+- [ ] Upgrade to babel 7, once it is stable
+- [ ] Provide service worker template branch
+- [ ] Provide fully features PWA example in a separate repository
+- [ ] Extend this list ;-)
 
 ## License
 MIT

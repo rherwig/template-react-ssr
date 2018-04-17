@@ -2,10 +2,11 @@ const merge = require('webpack-merge');
 const webpack = require('webpack');
 const common = require('./common');
 const join = require('path').join;
-const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const StatsWebpackPlugin = require('stats-webpack-plugin');
 
 module.exports = merge(common, {
+    mode: 'production',
     name: 'client',
     target: 'web',
     entry: [
@@ -14,13 +15,14 @@ module.exports = merge(common, {
     devtool: 'hidden-source-map',
     output: {
         filename: 'app.client.js',
-        chunkFilename: '[name].js'
+        chunkFilename: '[name].chunk.js'
     },
     module: {
         rules: [{
             test: /\.styl$/,
             exclude: /node_modules/,
-            use: ExtractCssChunks.extract({
+            use: ExtractTextPlugin.extract({
+                fallback: 'style-loader',
                 use: [{
                     loader: 'css-loader',
                     options: {
@@ -34,17 +36,7 @@ module.exports = merge(common, {
         }]
     },
     plugins: [
-        new ExtractCssChunks(),
-        new webpack.optimize.CommonsChunkPlugin({
-            names: ['bootstrap'],
-            filename: '[name].js',
-            minChunks: Infinity
-        }),
-        new StatsWebpackPlugin('stats.json'),
-        new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: JSON.stringify('production')
-            }
-        })
+        new ExtractTextPlugin('app.bundle.css'),
+        new StatsWebpackPlugin('stats.json')
     ]
 });
