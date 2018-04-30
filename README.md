@@ -90,6 +90,9 @@ directory.
 The following changes have been implemented in the course of developing
 the template.
 
+### 2.1.0
+* Implements [react-helmet](https://github.com/nfl/react-helmet) to provide improved handling for document meta information
+
 ### 2.0.1
 * Extends .editorconfig
 * Adds .prettierrc to enable formatting via [prettier](https://prettier.io)
