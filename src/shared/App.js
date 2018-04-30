@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Helmet from 'react-helmet';
 
 import './app.styl';
 
@@ -12,7 +13,12 @@ export default class App extends Component {
 
     render() {
         return (
-            <h1>Welcome to React Fiber.</h1>
+            <div>
+                <Helmet>
+                    <title>App Component | React Universal</title>
+                </Helmet>
+                <h1>Welcome to React Fiber.</h1>
+            </div>
         );
     }
 

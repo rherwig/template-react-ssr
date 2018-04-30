@@ -30,6 +30,7 @@
     "express": "^4.16.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
+    "react-helmet": "^5.2.0",
     "react-universal-component": "^2.5.5",
     "webpack-flush-chunks": "^1.2.3",
     "winston": "^2.4.1"
