@@ -90,6 +90,10 @@ directory.
 The following changes have been implemented in the course of developing
 the template.
 
+### 2.0.1
+* Extends .editorconfig
+* Adds .prettierrc to enable formatting via [prettier](https://prettier.io)
+
 ### 2.0.0
 * Upgraded to webpack 4
 * Upgraded to React 16.3
