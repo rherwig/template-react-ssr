@@ -1,7 +1,15 @@
 {
   "presets": [
-    "env",
-    "stage-0",
-    "react"
+    "react",
+    ["env", {
+      "targets": {
+        "node": "current",
+        "browsers": ["last 2 versions"]
+      }
+    }]
+  ],
+  "plugins": [
+    "universal-import",
+    "syntax-dynamic-import"
   ]
 }

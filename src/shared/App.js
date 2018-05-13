@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
+import Universal from 'react-universal-component';
 
 import './app.styl';
+
+const UniversalComponent = Universal(props =>
+    import(`./components/${props.name}`)
+);
 
 /**
  * The `App` component is the entry point for the react app.
@@ -9,17 +14,14 @@ import './app.styl';
  *
  * You can start developing your react app here.
  */
-export default class App extends Component {
 
+export default class App extends Component {
     render() {
         return (
             <div>
-                <Helmet>
-                    <title>App Component | React Universal</title>
-                </Helmet>
-                <h1>Welcome to React Fiber.</h1>
+                <UniversalComponent name="Title" />
+                <UniversalComponent name="H1" />
             </div>
         );
     }
-
 }
