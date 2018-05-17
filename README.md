@@ -90,6 +90,20 @@ directory.
 The following changes have been implemented in the course of developing
 the template.
 
+### 2.2.0
+* Implements code-splitting via [react-universal-component](https://github.com/faceyspacey/react-universal-component)
+as well as an example for using it.
+* Replaces [stage-0](https://babeljs.io/docs/plugins/preset-stage-0/) with [stage-2](https://babeljs.io/docs/plugins/preset-stage-2/) babel-plugin
+due to it being a more advanced and stable spec
+* Implements configuration for [babel-preset-env](https://babeljs.io/docs/plugins/preset-env) to make actual use of the preset
+* Removes `cssHash` from the application, since the [extract-css-chunks-webpack-plugin](https://github.com/faceyspacey/extract-css-chunks-webpack-plugin)
+is no longer implemented since version 2.0.0 of this template
+  * There are plans to switch to [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin),
+  but since it does not yet support HMR, I am gonna wait on that a little
+
+Thanks to [@arkhamRejek](https://github.com/arkhamRejek) for contributing the code-splitting feature 
+as well as the babel-preset changes!
+
 ### 2.1.0
 * Implements [react-helmet](https://github.com/nfl/react-helmet) to provide improved handling for document meta information
 
