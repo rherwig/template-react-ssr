@@ -1,6 +1,6 @@
 {
   "name": "react-ssr-template",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Server side rendering template for React 16",
   "main": "src/index.js",
   "scripts": {
