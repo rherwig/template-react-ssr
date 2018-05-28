@@ -2,6 +2,7 @@ const merge = require('webpack-merge');
 const webpack = require('webpack');
 const common = require('./common');
 const join = require('path').join;
+const ExtractCssChunksPlugin = require('extract-css-chunks-webpack-plugin');
 
 module.exports = merge(common, {
     mode: 'development',
@@ -19,8 +20,7 @@ module.exports = merge(common, {
     module: {
         rules: [{
             test: /\.styl$/,
-            exclude: /node_modules/,
-            use:  ['style-loader', {
+            use:  [ExtractCssChunksPlugin.loader, {
                 loader: 'css-loader',
                 options: {
                     modules: true,
@@ -30,6 +30,7 @@ module.exports = merge(common, {
         }]
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new ExtractCssChunksPlugin()
     ]
 });

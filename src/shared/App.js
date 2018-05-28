@@ -21,7 +21,7 @@ export default class App extends Component {
                 </Helmet>
 
                 <h1>Welcome to React Fiber.</h1>
-                <UniversalComponent name="GettingStarted"/>
+                <UniversalComponent name="getting-started"/>
             </div>
         );
     }
