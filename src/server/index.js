@@ -22,12 +22,13 @@ export default ({ clientStats }) => async (req, res) => {
     const appString = ReactDOM.renderToString(app);
     const { title } = Helmet.renderStatic();
     const chunkNames = flushChunkNames();
-    const { js, styles } = flushChunks(clientStats, { chunkNames });
+    const { js, styles, cssHash } = flushChunks(clientStats, { chunkNames });
 
     res.render('index', {
         title: title.toString(),
         appString,
         js,
-        styles
+        styles,
+        cssHash
     });
 };

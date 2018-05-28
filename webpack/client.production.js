@@ -1,8 +1,7 @@
 const merge = require('webpack-merge');
-const webpack = require('webpack');
 const common = require('./common');
 const join = require('path').join;
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ExtractCssChunksPlugin = require('extract-css-chunks-webpack-plugin');
 const StatsWebpackPlugin = require('stats-webpack-plugin');
 
 module.exports = merge(common, {
@@ -21,22 +20,19 @@ module.exports = merge(common, {
         rules: [{
             test: /\.styl$/,
             exclude: /node_modules/,
-            use: ExtractTextPlugin.extract({
-                fallback: 'style-loader',
-                use: [{
-                    loader: 'css-loader',
-                    options: {
-                        modules: true,
-                        localIdentName: '[name]__[local]--[hash:base64:5]'
-                    }
-                }, {
-                    loader: 'stylus-loader'
-                }]
-            })
+            use: [ExtractCssChunksPlugin.loader, {
+                loader: 'css-loader',
+                options: {
+                    modules: true,
+                    localIdentName: '[name]__[local]--[hash:base64:5]'
+                }
+            }, {
+                loader: 'stylus-loader'
+            }]
         }]
     },
     plugins: [
-        new ExtractTextPlugin('app.bundle.css'),
+        new ExtractCssChunksPlugin(),
         new StatsWebpackPlugin('stats.json')
     ]
 });
