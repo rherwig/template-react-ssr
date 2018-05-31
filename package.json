@@ -9,7 +9,15 @@
     "build": "npm run build:client && npm run build:server && npm run build:node",
     "build:client": "cross-env NODE_ENV=production webpack -p --config webpack/client.production.js",
     "build:server": "cross-env NODE_ENV=production webpack -p --config webpack/server.production.js",
-    "build:node": "cross-env NODE_ENV=production webpack -p --config webpack/node.production.js"
+    "build:node": "cross-env NODE_ENV=production webpack -p --config webpack/node.production.js",
+    "test": "jest"
+  },
+  "jest": {
+    "setupFiles": ["./src/__tests__/setup.js"],
+    "testMatch": [ "**/__tests__/**/(spec|test).js?(x)", "**/?(*.)+(spec|test).js?(x)" ],
+    "moduleNameMapper": {
+      "\\.styl$": "identity-obj-proxy"
+    }
   },
   "keywords": [
     "ssr",
@@ -40,6 +48,7 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
+    "babel-jest": "^23.0.1",
     "babel-loader": "^7.1.4",
     "babel-plugin-universal-import": "^2.0.0",
     "babel-preset-env": "^1.6.1",
@@ -50,7 +59,12 @@
     "cross-env": "^5.1.4",
     "css-hot-loader": "^1.3.9",
     "css-loader": "^0.28.11",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^23.1.0",
+    "react-test-renderer": "^16.4.0",
     "stats-webpack-plugin": "^0.6.2",
     "style-loader": "^0.20.3",
     "stylus": "^0.54.5",
