@@ -90,6 +90,12 @@ directory.
 The following changes have been implemented in the course of developing
 the template.
 
+### 2.3.0
+* Implements server-side compression via [shrink-ray](https://github.com/aickin/shrink-ray)
+  * Compression is only enabled in production mode
+  * Thanks to [@zackljackson](https://github.com/zackljackson) for the hint on shrink-ray
+* Implements [helmet](https://github.com/helmetjs/helmet) for security-relevant response headers
+
 ### 2.2.0
 * Implements code-splitting via [react-universal-component](https://github.com/faceyspacey/react-universal-component)
 as well as an example for using it.

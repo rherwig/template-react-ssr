@@ -1,4 +1,6 @@
 import express from 'express';
+import helmet from 'helmet';
+import shrinkRay from 'shrink-ray';
 import { join } from 'path';
 import { log } from 'winston';
 
@@ -53,15 +55,20 @@ const configureProduction = app => {
 
 const app = express();
 
+const isDevelopment = process.env.NODE_ENV === 'development';
+
 log('info', `Configuring server for environment: ${process.env.NODE_ENV}...`);
-if (process.env.NODE_ENV === 'development') {
+app.use(helmet());
+app.use(shrinkRay({
+    filter: () => !isDevelopment
+}));
+app.set('view engine', 'ejs');
+app.set('port', process.env.PORT || 3000);
+
+if (isDevelopment) {
     configureDevelopment(app);
 } else {
     configureProduction(app);
 }
-
-log('info', 'Configuring server engine...');
-app.set('view engine', 'ejs');
-app.set('port', process.env.PORT || 3000);
 
 app.listen(app.get('port'), () => log('info', `Server listening on port ${app.get('port')}...`));
