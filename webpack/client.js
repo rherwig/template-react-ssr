@@ -1,7 +1,8 @@
-const merge = require('webpack-merge');
 const webpack = require('webpack');
+const merge = require('webpack-merge');
 const common = require('./common');
-const join = require('path').join;
+const { join } = require('path');
+const ExtractCssChunksPlugin = require('extract-css-chunks-webpack-plugin');
 
 module.exports = merge(common, {
     mode: 'development',
@@ -17,19 +18,40 @@ module.exports = merge(common, {
         chunkFilename: '[name].chunk.js'
     },
     module: {
-        rules: [{
-            test: /\.styl$/,
-            exclude: /node_modules/,
-            use:  ['style-loader', {
-                loader: 'css-loader',
-                options: {
-                    modules: true,
-                    localIdentName: '[name]__[local]--[hash:base64:5]'
+        rules: [
+            {
+                test: /\.styl$/,
+                exclude: /node_modules/,
+                use: [
+                    ExtractCssChunksPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: true,
+                            localIdentName: '[name]__[local]--[hash:base64:5]'
+                        }
+                    },
+                    'stylus-loader'
+                ]
+            }
+        ]
+    },
+    optimization: {
+        runtimeChunk: {
+            name: 'bootstrap'
+        },
+        splitChunks: {
+            chunks: 'initial',
+            cacheGroups: {
+                vendors: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: 'vendor'
                 }
-            }, 'stylus-loader']
-        }]
+            }
+        }
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new ExtractCssChunksPlugin()
     ]
 });

@@ -12,7 +12,6 @@ import UniversalComponent from './components/UniversalComponent';
  * You can start developing your react app here.
  */
 export default class App extends Component {
-
     render() {
         return (
             <div>
@@ -21,9 +20,8 @@ export default class App extends Component {
                 </Helmet>
 
                 <h1>Welcome to React Fiber.</h1>
-                <UniversalComponent name="GettingStarted"/>
+                <UniversalComponent name="getting-started" />
             </div>
         );
     }
-
 }

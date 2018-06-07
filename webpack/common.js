@@ -7,16 +7,15 @@ module.exports = {
     },
     resolve: {
         extensions: ['.js'],
-        modules: [
-            join(__dirname, '../node_modules'),
-            join(__dirname, '../src')
-        ]
+        modules: [join(__dirname, '../node_modules'), join(__dirname, '../src')]
     },
     module: {
-        rules: [{
-            test: /\.js$/,
-            exclude: /node_modules/,
-            use: 'babel-loader'
-        }]
+        rules: [
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: 'babel-loader'
+            }
+        ]
     }
 };

@@ -90,6 +90,10 @@ directory.
 The following changes have been implemented in the course of developing
 the template.
 
+### 2.4.0
+* CSS chunking is back, thanks to the now webpack 4 compliant version of [extract-css-chunks-webpack-plugin](https://github.com/faceyspacey/extract-css-chunks-webpack-plugin)
+  * Special thanks to [@zackljackson](https://github.com/zackljackson) for making this possible
+
 ### 2.3.0
 * Implements server-side compression via [shrink-ray](https://github.com/aickin/shrink-ray)
   * Compression is only enabled in production mode
