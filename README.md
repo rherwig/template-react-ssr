@@ -90,6 +90,10 @@ directory.
 The following changes have been implemented in the course of developing
 the template.
 
+### 2.5.0
+* Switched to babel 7
+* Switched to nodemon for watch mode
+
 ### 2.4.0
 * CSS chunking is back, thanks to the now webpack 4 compliant version of [extract-css-chunks-webpack-plugin](https://github.com/faceyspacey/extract-css-chunks-webpack-plugin)
   * Special thanks to [@zackljackson](https://github.com/zackljackson) for making this possible
@@ -132,7 +136,6 @@ since the former is not supported with webpack 4 anymore
 The following features are planned for future upgrades of the template.
 If there are any request, feel free to open an issue or a pull request.
 
-- [ ] Upgrade to babel 7, once it is stable
 - [ ] Provide service worker template branch
 - [ ] Provide fully features PWA example in a separate repository
 - [ ] Extend this list ;-)

@@ -11,7 +11,7 @@ module.exports = merge(common, {
         __dirname: false,
         __filename: false
     },
-    entry: ['babel-polyfill', join(__dirname, '../src/index')],
+    entry: ['@babel/polyfill', join(__dirname, '../src/index')],
     output: {
         filename: 'index.js',
         path: join(__dirname, '../public')

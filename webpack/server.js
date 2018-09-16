@@ -9,7 +9,7 @@ module.exports = merge(common, {
     name: 'server',
     target: 'node',
     externals: nodeExternals,
-    entry: [join(__dirname, '../src/server/index')],
+    entry: ['@babel/polyfill', join(__dirname, '../src/server/index')],
     devtool: 'inline-source-map',
     output: {
         filename: 'app.server.js',
