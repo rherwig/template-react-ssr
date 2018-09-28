@@ -28,7 +28,7 @@ export default ({ clientStats }) => async (req, res) => {
         appString,
         js,
         styles,
-        helmet
+        helmet,
     });
 
     res.set('Content-Type', 'text/html').end(document);

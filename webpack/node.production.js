@@ -1,6 +1,8 @@
 const merge = require('webpack-merge');
 const common = require('./common');
-const join = require('path').join;
+const { join } = require('path');
+const CopyPlugin = require('copy-webpack-plugin');
+
 const extendedNodeExternals = require('../scripts/extended-node-externals');
 
 module.exports = merge(common, {
@@ -15,5 +17,13 @@ module.exports = merge(common, {
     output: {
         filename: 'index.js',
         path: join(__dirname, '../public')
-    }
+    },
+    plugins: [
+        new CopyPlugin([
+            {
+                from: join(__dirname, '../package.json'),
+                to: join(__dirname, '../public/package.json')
+            }
+        ])
+    ]
 });

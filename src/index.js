@@ -10,22 +10,21 @@ import { log } from 'winston';
  *
  * @param app Express app
  */
-const configureDevelopment = app => {
+const configureDevelopment = (app) => {
     const clientConfig = require('../webpack/client');
     const serverConfig = require('../webpack/server');
-    const publicPath = clientConfig.output.publicPath;
-    const outputPath = clientConfig.output.path;
+    const { publicPath, path } = clientConfig.output;
 
     const multiCompiler = require('webpack')([clientConfig, serverConfig]);
     const clientCompiler = multiCompiler.compilers[0];
 
-    app.use(require('webpack-dev-middleware')(multiCompiler, {publicPath}));
+    app.use(require('webpack-dev-middleware')(multiCompiler, { publicPath }));
     app.use(require('webpack-hot-middleware')(clientCompiler));
 
-    app.use(publicPath, express.static(outputPath));
+    app.use(publicPath, express.static(path));
 
     app.use(require('webpack-hot-server-middleware')(multiCompiler, {
-        serverRendererOptions: { outputPath }
+        serverRendererOptions: { outputPath: path },
     }));
 };
 
@@ -36,7 +35,7 @@ const configureDevelopment = app => {
  *
  * @param app Express app
  */
-const configureProduction = app => {
+const configureProduction = (app) => {
     const clientStats = require('./assets/stats.json');
     const serverRender = require('./assets/app.server.js').default;
     const publicPath = '/';
@@ -45,7 +44,7 @@ const configureProduction = app => {
     app.use(publicPath, express.static(outputPath));
     app.use(serverRender({
         clientStats,
-        outputPath
+        outputPath,
     }));
 };
 
@@ -56,7 +55,7 @@ const isDevelopment = process.env.NODE_ENV === 'development';
 log('info', `Configuring server for environment: ${process.env.NODE_ENV}...`);
 app.use(helmet());
 app.use(shrinkRay({
-    filter: () => !isDevelopment
+    filter: () => !isDevelopment,
 }));
 app.set('port', process.env.PORT || 3000);
 

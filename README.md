@@ -74,6 +74,23 @@ server is started from `src/index.js`.
 For more information on how the specific parts of the application work,
 please refer to the documentation in the code.
 
+## Testing
+The general testing engine used by this project consists of jest and react-test-renderer.
+You can run the tests by using the following command:
+```
+$ npm test
+```
+
+## Linting
+To run eslint, execute the following command:
+```
+$ npm run lint
+```
+
+**Please note:** Linting is only available via this command and not integrated
+via webpack. This is done on purpose, as eslint is somewhat biased on the preference
+of the creator of the config.
+
 ## Building for Production
 In order to build for production and run the finished project, execute
 the following:
@@ -95,6 +112,9 @@ the template.
 This change allows for much more flexibility, i.e. with [react-helmet](https://github.com/nfl/react-helmet)
 and dynamically requiring content, such as styles.
 * Introduces PostCSS to enable autoprefixer, since support of older browser (looking at you IE) is still important.
+* Implement eslint and basic configuration.
+* Implements basic test engine using jest.
+* Improves production build by executing steps in parallel.
 
 ### 2.5.0
 * Switched to babel 7
