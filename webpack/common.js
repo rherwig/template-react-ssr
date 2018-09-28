@@ -1,4 +1,5 @@
-const join = require('path').join;
+const { join } = require('path');
+const WebpackBar = require('webpackbar');
 
 module.exports = {
     output: {
@@ -17,5 +18,8 @@ module.exports = {
                 use: 'babel-loader'
             }
         ]
-    }
+    },
+    plugins: [
+        new WebpackBar()
+    ]
 };
