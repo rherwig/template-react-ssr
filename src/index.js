@@ -27,8 +27,6 @@ const configureDevelopment = app => {
     app.use(require('webpack-hot-server-middleware')(multiCompiler, {
         serverRendererOptions: { outputPath }
     }));
-
-    app.set('views', join(__dirname, '../public/views'));
 };
 
 /**
@@ -49,8 +47,6 @@ const configureProduction = app => {
         clientStats,
         outputPath
     }));
-
-    app.set('views', join(__dirname, 'views'));
 };
 
 const app = express();
@@ -62,7 +58,6 @@ app.use(helmet());
 app.use(shrinkRay({
     filter: () => !isDevelopment
 }));
-app.set('view engine', 'ejs');
 app.set('port', process.env.PORT || 3000);
 
 if (isDevelopment) {

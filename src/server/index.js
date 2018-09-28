@@ -4,6 +4,7 @@ import Helmet from 'react-helmet';
 import { flushChunkNames } from 'react-universal-component/server';
 import flushChunks from 'webpack-flush-chunks';
 
+import createDocument from './document';
 import App from '../shared/App';
 
 /**
@@ -20,14 +21,15 @@ export default ({ clientStats }) => async (req, res) => {
     );
 
     const appString = ReactDOM.renderToString(app);
-    const { title } = Helmet.renderStatic();
+    const helmet = Helmet.renderStatic();
     const chunkNames = flushChunkNames();
     const { js, styles } = flushChunks(clientStats, { chunkNames });
-
-    res.render('index', {
-        title: title.toString(),
+    const document = createDocument({
         appString,
         js,
-        styles
+        styles,
+        helmet
     });
+
+    res.set('Content-Type', 'text/html').end(document);
 };

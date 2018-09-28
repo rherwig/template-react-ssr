@@ -90,6 +90,12 @@ directory.
 The following changes have been implemented in the course of developing
 the template.
 
+### 3.0.0
+* Switched from EJS for templating to basic HTML using template string interpolation.
+This change allows for much more flexibility, i.e. with [react-helmet](https://github.com/nfl/react-helmet)
+and dynamically requiring content, such as styles.
+* Introduces PostCSS to enable autoprefixer, since support of older browser (looking at you IE) is still important.
+
 ### 2.5.0
 * Switched to babel 7
 * Switched to nodemon for watch mode

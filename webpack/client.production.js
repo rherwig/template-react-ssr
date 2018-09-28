@@ -28,9 +28,8 @@ module.exports = merge(common, {
                             localIdentName: '[name]__[local]--[hash:base64:5]'
                         }
                     },
-                    {
-                        loader: 'stylus-loader'
-                    }
+                    'postcss-loader',
+                    'stylus-loader'
                 ]
             }
         ]
