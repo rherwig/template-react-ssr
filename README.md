@@ -1,10 +1,13 @@
-# React 16 SSR Template
+# React SSR Template
 This project provides a template for React 16 (Fiber) using server
 side rendering.
 
 *Important:* The master branch is only supposed to contain the bare-bone template.
 There are different branches containing more advanced features, like streaming and 
 more to come in the future. Those are documented in the Branches section.
+
+*The template has been renamed to `template-react-ssr` since it will upgrade to newer versions of React, as soon
+as they are stable.*
 
 ## Table of contents
 
