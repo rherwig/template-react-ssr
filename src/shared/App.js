@@ -19,6 +19,11 @@ import UniversalComponent from './components/UniversalComponent';
  * of your top-level routes here.
  */
 export default class App extends Component {
+
+
+    componentDidUpdate() {
+        console.log(this.props);
+    }
     render() {
         return (
             <div>
