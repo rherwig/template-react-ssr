@@ -2,10 +2,8 @@
 1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'ls', '--depth', '0', '--json' ]
 2 info using npm@3.5.2
 3 info using node@v8.10.0
-4 error error in /home/davidj/git-workspace/template-react-ssr: Failed to parse json
-4 error Unexpected token '<' at 38:1
-4 error <<<<<<< HEAD
-4 error ^
+4 error extraneous: react-redux@5.1.1 /home/davidj/git-workspace/template-react-ssr/node_modules/react-redux
+4 error extraneous: redux@4.0.1 /home/davidj/git-workspace/template-react-ssr/node_modules/redux
 4 error peer dep missing: ajv@^6.0.0, required by ajv-keywords@3.2.0
 4 error peer dep missing: ajv@^6.0.0, required by ajv-keywords@3.2.0
 4 error peer dep missing: ajv@^6.0.0, required by ajv-keywords@3.2.0

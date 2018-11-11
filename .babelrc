@@ -1,26 +1,33 @@
 {
-<<<<<<< HEAD
   "presets": [
-    ["@babel/preset-env", {
-      "targets": {
-        "node": "current",
-        "browsers": ["last 2 versions", "IE 11"]
-       }
-    }],
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "node": "current",
+          "browsers": [
+            "last 2 versions",
+            "IE 11"
+          ]
+        }
+      }
+    ],
     "@babel/preset-react"
   ],
   "plugins": [
-    ["@babel/plugin-proposal-decorators", {
-      "legacy": true
-    }],
-    ["@babel/plugin-proposal-class-properties", {
-      "loose": true
-    }],
+    [
+      "@babel/plugin-proposal-decorators",
+      {
+        "legacy": true
+      }
+    ],
+    [
+      "@babel/plugin-proposal-class-properties",
+      {
+        "loose": true
+      }
+    ],
     "@babel/plugin-syntax-dynamic-import",
     "universal-import"
   ]
-=======
-  "presets": ["env", "stage-0", "react"],
-  "plugins": ["transform-decorators-legacy"]
->>>>>>> implements most basic redux example using ssr
 }

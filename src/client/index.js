@@ -17,15 +17,10 @@ delete window.__PRELOADED_STATE__;
  */
 const render = (Component) => {
     hydrate(
-<<<<<<< HEAD
-        <Component/>,
-        document.getElementById('react-root'),
-=======
         <Provider store={store}>
-            <Component/>
+            <Component />
         </Provider>,
         document.getElementById('react-root')
->>>>>>> implements most basic redux example using ssr
     );
 };
 

@@ -5,11 +5,8 @@ import { flushChunkNames } from 'react-universal-component/server';
 import flushChunks from 'webpack-flush-chunks';
 import { Provider } from 'react-redux';
 
-<<<<<<< HEAD
 import createDocument from './document';
-=======
 import configureStore from '../shared/core/configure-store';
->>>>>>> implements most basic redux example using ssr
 import App from '../shared/App';
 
 /**
@@ -34,7 +31,7 @@ export default ({ clientStats }) => async (req, res) => {
 
     const app = (
         <Provider store={store}>
-            <App/>
+            <App />
         </Provider>
     );
 
@@ -46,12 +43,8 @@ export default ({ clientStats }) => async (req, res) => {
         appString,
         js,
         styles,
-<<<<<<< HEAD
         helmet,
-=======
-        cssHash,
         preloadedState: JSON.stringify(preloadedState)
->>>>>>> implements most basic redux example using ssr
     });
 
     res.set('Content-Type', 'text/html').end(document);

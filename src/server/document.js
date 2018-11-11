@@ -3,6 +3,7 @@ export default ({
     js,
     styles,
     helmet,
+    preloadedState
 }) => `
     <!doctype html>
     <html>
@@ -18,7 +19,9 @@ export default ({
     <body>
     
       <div id="react-root">${appString}</div>
-      
+      <script>
+          window.__PRELOADED_STATE__ = ${preloadedState}
+      </script>
       ${js}
       
     </body>
