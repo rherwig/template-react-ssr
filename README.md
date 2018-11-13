@@ -62,8 +62,8 @@ from the server as well as state hydration on the client.
 To start development, follow these steps:
 
 ```
-$ git clone https://github.com/rherwig/template-react-16-ssr.git
-$ cd template-react-16-ssr
+$ git clone https://github.com/rherwig/template-react-ssr.git
+$ cd template-react-ssr
 $ npm i
 $ npm start
 ```
