@@ -19,6 +19,8 @@ as they are stable.*
     * [Redux](#redux-(feature/redux))
 * [Development](#development)
 * [Building for production](#building-for-production)
+* [Debugging](#debugging)
+    * [VSCode](#vscode)
 * [Changelog](#changelog)
 * [Planned features](#planned-features)
 * [License](#license)
@@ -105,6 +107,39 @@ $ node public/index
 
 This bundles and optimizes your app and runs it from the `public/`
 directory.
+
+## Debugging
+This section explains how to debug server and client side of the app in
+various IDEs.
+
+### VSCode
+In order to debug with VSCode, you want to create a debug configuration.
+This is configured via the `launch.json` file located inside the `.vscode`
+directory of your project.
+
+Use the following `launch.json` for debugging:
+```json
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Debug",
+            "program": "${workspaceFolder}/src/index.js",
+            "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/babel-node",
+            "runtimeArgs": ["--nolazy"],
+            "env": {
+                "NODE_ENV": "development"
+            }
+        }        
+    ]
+}
+```
+
+After setting up the configuration, start debugging by either selecting
+`Debug > Start Debugging` in the main menu bar or by pressing `F5` on your
+keyboard.
 
 ## Changelog
 The following changes have been implemented in the course of developing

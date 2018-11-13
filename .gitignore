@@ -1,6 +1,9 @@
 # IntelliJ
 .idea
 
+# VSCode
+.vscode
+
 # NodeJS
 node_modules
 
