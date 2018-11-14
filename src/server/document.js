@@ -1,9 +1,4 @@
-export default ({
-    appString,
-    js,
-    styles,
-    helmet,
-}) => `
+const getPageStart = ({ styles, helmet }) => `
     <!doctype html>
     <html>
     <head>
@@ -16,11 +11,26 @@ export default ({
         ${helmet.title.toString()}
     </head>
     <body>
-    
-      <div id="react-root">${appString}</div>
-      
-      ${js}
+`;
+
+const getAppStart = () => `<div id="react-root">`;
+
+const getAppEnd = () => `</div>`;
+
+const getPageEnd = ({ js }) => `
+    ${js}
       
     </body>
     </html>
 `;
+
+export default ({
+    js,
+    styles,
+    helmet,
+}) => ({
+    pageStart: getPageStart({ styles, helmet }),
+    appStart: getAppStart(),
+    appEnd: getAppEnd(),
+    pageEnd: getPageEnd({ js }),
+});

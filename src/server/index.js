@@ -20,16 +20,22 @@ export default ({ clientStats }) => async (req, res) => {
         <App/>
     );
 
-    const appString = ReactDOM.renderToString(app);
     const helmet = Helmet.renderStatic();
     const chunkNames = flushChunkNames();
     const { js, styles } = flushChunks(clientStats, { chunkNames });
-    const document = createDocument({
-        appString,
+    const { pageStart, appStart, appEnd, pageEnd } = createDocument({
         js,
         styles,
         helmet,
     });
 
-    res.set('Content-Type', 'text/html').end(document);
+    res.set('Content-Type', 'text/html');
+    res.write(`${pageStart}${appStart}`);
+
+    const stream = ReactDOM.renderToNodeStream(app);
+    stream.pipe(res, { end: false });
+
+    stream.on('end', () => {
+        res.end(`${appEnd}${pageEnd}`);
+    });
 };
