@@ -20,10 +20,6 @@ import UniversalComponent from './components/UniversalComponent';
  */
 export default class App extends Component {
 
-
-    componentDidUpdate() {
-        console.log(this.props);
-    }
     render() {
         return (
             <div>
