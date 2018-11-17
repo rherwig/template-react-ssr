@@ -31,15 +31,12 @@ export default ({ clientStats }) => async (req, res) => {
     const appString = ReactDOM.renderToString(app);
     const helmet = Helmet.renderStatic();
     const chunkNames = flushChunkNames();
-    const { js, styles,
-        //    cssHash 
-    } = flushChunks(clientStats, { chunkNames });
+    const { js, styles } = flushChunks(clientStats, { chunkNames });
     const document = createDocument({
         appString,
         js,
         styles,
         helmet,
-        //    cssHash,  //I'm not sure if this is needed?
     });
 
     /*
