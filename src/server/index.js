@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/server';
+import Helmet from 'react-helmet';
 import { flushChunkNames } from 'react-universal-component/server';
 import flushChunks from 'webpack-flush-chunks';
 
+import createDocument from './document';
 import { StaticRouter } from 'react-router';
 
 import App from '../shared/App';
@@ -20,15 +22,22 @@ export default ({ clientStats }) => async (req, res) => {
 
     const app = (
         <StaticRouter
-          location={req.url}
-          context={context}>
-            <App/>
+            location={req.url}
+            context={context}>
+            <App />
         </StaticRouter>
     );
 
     const appString = ReactDOM.renderToString(app);
+    const helmet = Helmet.renderStatic();
     const chunkNames = flushChunkNames();
-    const { js, styles, cssHash } = flushChunks(clientStats, { chunkNames });
+    const { js, styles } = flushChunks(clientStats, { chunkNames });
+    const document = createDocument({
+        appString,
+        js,
+        styles,
+        helmet,
+    });
 
     /*
      * See https://reacttraining.com/react-router/web/guides/server-rendering for details
@@ -40,11 +49,7 @@ export default ({ clientStats }) => async (req, res) => {
         });
         res.end();
     } else {
-        res.render('index', {
-            appString,
-            js,
-            styles,
-            cssHash
-        });
+
+        res.set('Content-Type', 'text/html').end(document);
     }
 };

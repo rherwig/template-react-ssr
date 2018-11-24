@@ -1,4 +1,6 @@
 import express from 'express';
+import helmet from 'helmet';
+import shrinkRay from 'shrink-ray';
 import { join } from 'path';
 import { log } from 'winston';
 
@@ -8,25 +10,22 @@ import { log } from 'winston';
  *
  * @param app Express app
  */
-const configureDevelopment = app => {
+const configureDevelopment = (app) => {
     const clientConfig = require('../webpack/client');
     const serverConfig = require('../webpack/server');
-    const publicPath = clientConfig.output.publicPath;
-    const outputPath = clientConfig.output.path;
+    const { publicPath, path } = clientConfig.output;
 
     const multiCompiler = require('webpack')([clientConfig, serverConfig]);
     const clientCompiler = multiCompiler.compilers[0];
 
-    app.use(require('webpack-dev-middleware')(multiCompiler, {publicPath}));
+    app.use(require('webpack-dev-middleware')(multiCompiler, { publicPath }));
     app.use(require('webpack-hot-middleware')(clientCompiler));
 
-    app.use(publicPath, express.static(outputPath));
+    app.use(publicPath, express.static(path));
 
     app.use(require('webpack-hot-server-middleware')(multiCompiler, {
-        serverRendererOptions: { outputPath }
+        serverRendererOptions: { outputPath: path },
     }));
-
-    app.set('views', join(__dirname, '../public/views'));
 };
 
 /**
@@ -36,7 +35,7 @@ const configureDevelopment = app => {
  *
  * @param app Express app
  */
-const configureProduction = app => {
+const configureProduction = (app) => {
     const clientStats = require('./assets/stats.json');
     const serverRender = require('./assets/app.server.js').default;
     const publicPath = '/';
@@ -45,23 +44,25 @@ const configureProduction = app => {
     app.use(publicPath, express.static(outputPath));
     app.use(serverRender({
         clientStats,
-        outputPath
+        outputPath,
     }));
-
-    app.set('views', join(__dirname, 'views'));
 };
 
 const app = express();
 
+const isDevelopment = process.env.NODE_ENV === 'development';
+
 log('info', `Configuring server for environment: ${process.env.NODE_ENV}...`);
-if (process.env.NODE_ENV === 'development') {
+app.use(helmet());
+app.use(shrinkRay({
+    filter: () => !isDevelopment,
+}));
+app.set('port', process.env.PORT || 3000);
+
+if (isDevelopment) {
     configureDevelopment(app);
 } else {
     configureProduction(app);
 }
-
-log('info', 'Configuring server engine...');
-app.set('view engine', 'ejs');
-app.set('port', process.env.PORT || 3000);
 
 app.listen(app.get('port'), () => log('info', `Server listening on port ${app.get('port')}...`));

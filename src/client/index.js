@@ -12,10 +12,10 @@ import App from '../shared/App';
  *
  * @param Component React component that should be rendered
  */
-const render = Component => {
+const render = (Component) => {
     hydrate(
-    	<Router>
-            <Component/>
+        <Router>
+            <Component />
         </Router>,
         document.getElementById('react-root')
     );
@@ -28,7 +28,7 @@ render(App);
  */
 if (module.hot && process.env.NODE_ENV === 'development') {
     module.hot.accept('../shared/App', () => {
-        const App = require('../shared/App').default;
-        render(App);
+        const NextApp = require('../shared/App').default;
+        render(NextApp);
     });
 }

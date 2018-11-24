@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Helmet from 'react-helmet';
 
 import { Switch, Route } from 'react-router-dom';
 
@@ -7,6 +8,8 @@ import About from './components/About';
 import NotFound from './components/NotFound';
 
 import './app.styl';
+
+import UniversalComponent from './components/UniversalComponent';
 
 /**
  * The `App` component is the entry point for the react app.
@@ -19,12 +22,20 @@ export default class App extends Component {
 
     render() {
         return (
-            <Switch>
-              <Route exact path='/' component={Home} />
-              <Route path='/about' component={About} />
-              <Route component={NotFound} />
-            </Switch>
+            <div>
+                <Helmet>
+                    <title>App Component | React Universal</title>
+                </Helmet>
+
+                <h1>Welcome to React Fiber.</h1>
+                <UniversalComponent name="getting-started" />
+                <Switch>
+                    <Route exact path='/' component={Home} />
+                    <Route path='/about' component={About} />
+                    <Route component={NotFound} />
+                </Switch>
+            </div>
+
         );
     }
-
 }

@@ -1,50 +1,58 @@
-const merge = require('webpack-merge');
 const webpack = require('webpack');
+const merge = require('webpack-merge');
 const common = require('./common');
-const join = require('path').join;
-const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
+const { join } = require('path');
+const ExtractCssChunksPlugin = require('extract-css-chunks-webpack-plugin');
 
 module.exports = merge(common, {
+    mode: 'development',
     name: 'client',
     target: 'web',
     entry: [
-        'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=false&quiet=false&noInfo=false',
+        'webpack-hot-middleware/client',
         join(__dirname, '../src/client/index')
     ],
     devtool: 'inline-source-map',
     output: {
         filename: 'app.client.js',
-        chunkFilename: '[name].js'
+        chunkFilename: '[name].chunk.js'
     },
     module: {
-        rules: [{
-            test: /\.styl$/,
-            exclude: /node_modules/,
-            use: ExtractCssChunks.extract({
-                use: [{
-                    loader: 'css-loader',
-                    options: {
-                        modules: true,
-                        localIdentName: '[name]__[local]--[hash:base64:5]'
-                    }
-                }, {
-                    loader: 'stylus-loader'
-                }]
-            })
-        }]
+        rules: [
+            {
+                test: /\.styl$/,
+                exclude: /node_modules/,
+                use: [
+                    ExtractCssChunksPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: true,
+                            localIdentName: '[name]__[local]--[hash:base64:5]'
+                        }
+                    },
+                    'postcss-loader',
+                    'stylus-loader'
+                ]
+            }
+        ]
+    },
+    optimization: {
+        runtimeChunk: {
+            name: 'bootstrap'
+        },
+        splitChunks: {
+            chunks: 'initial',
+            cacheGroups: {
+                vendors: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: 'vendor'
+                }
+            }
+        }
     },
     plugins: [
-        new ExtractCssChunks(),
-        new webpack.optimize.CommonsChunkPlugin({
-            names: ['bootstrap'], // needed to put webpack bootstrap code before chunks
-            filename: '[name].js',
-            minChunks: Infinity
-        }),
-        new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: JSON.stringify('development')
-            }
-        }),
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new ExtractCssChunksPlugin()
     ]
 });
