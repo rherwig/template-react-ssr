@@ -5,6 +5,9 @@
 node_modules
 
 # Project
-public/**.json
-public/assets
-public/index.js
+public
+__tests__/__snapshots__
+
+#Logs
+*.log 
+

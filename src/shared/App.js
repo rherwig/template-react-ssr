@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Helmet from 'react-helmet';
 
 import './app.styl';
 
+import UniversalComponent from './components/UniversalComponent';
 import { addTodo } from './actions/todos';
 
 /**
@@ -37,6 +39,11 @@ export default class App extends Component {
         console.log(todos);
         return (
             <div>
+                <Helmet>
+                    <title>App Component | React Universal</title>
+                </Helmet>
+
+                <UniversalComponent name="getting-started" />
                 <h1>Welcome to React Fiber with Redux.</h1>
                 <ul>
                     {todos.map(todo =>
@@ -47,5 +54,4 @@ export default class App extends Component {
             </div>
         );
     }
-
 }
