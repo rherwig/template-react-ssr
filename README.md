@@ -142,59 +142,7 @@ After setting up the configuration, start debugging by either selecting
 keyboard.
 
 ## Changelog
-The following changes have been implemented in the course of developing
-the template.
-
-### 3.0.0
-* Switched from EJS for templating to basic HTML using template string interpolation.
-This change allows for much more flexibility, i.e. with [react-helmet](https://github.com/nfl/react-helmet)
-and dynamically requiring content, such as styles.
-* Introduces PostCSS to enable autoprefixer, since support of older browser (looking at you IE) is still important.
-* Implement eslint and basic configuration.
-* Implements basic test engine using jest.
-* Improves production build by executing steps in parallel.
-
-### 2.5.0
-* Switched to babel 7
-* Switched to nodemon for watch mode
-
-### 2.4.0
-* CSS chunking is back, thanks to the now webpack 4 compliant version of [extract-css-chunks-webpack-plugin](https://github.com/faceyspacey/extract-css-chunks-webpack-plugin)
-  * Special thanks to [@zackljackson](https://github.com/zackljackson) for making this possible
-
-### 2.3.0
-* Implements server-side compression via [shrink-ray](https://github.com/aickin/shrink-ray)
-  * Compression is only enabled in production mode
-  * Thanks to [@zackljackson](https://github.com/zackljackson) for the hint on shrink-ray
-* Implements [helmet](https://github.com/helmetjs/helmet) for security-relevant response headers
-
-### 2.2.0
-* Implements code-splitting via [react-universal-component](https://github.com/faceyspacey/react-universal-component)
-as well as an example for using it.
-* Replaces [stage-0](https://babeljs.io/docs/plugins/preset-stage-0/) with [stage-2](https://babeljs.io/docs/plugins/preset-stage-2/) babel-plugin
-due to it being a more advanced and stable spec
-* Implements configuration for [babel-preset-env](https://babeljs.io/docs/plugins/preset-env) to make actual use of the preset
-* Removes `cssHash` from the application, since the [extract-css-chunks-webpack-plugin](https://github.com/faceyspacey/extract-css-chunks-webpack-plugin)
-is no longer implemented since version 2.0.0 of this template
-  * There are plans to switch to [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin),
-  but since it does not yet support HMR, I am gonna wait on that a little
-
-Thanks to [@arkhamRejek](https://github.com/arkhamRejek) for contributing the code-splitting feature 
-as well as the babel-preset changes!
-
-### 2.1.0
-* Implements [react-helmet](https://github.com/nfl/react-helmet) to provide improved handling for document meta information
-
-### 2.0.1
-* Extends .editorconfig
-* Adds .prettierrc to enable formatting via [prettier](https://prettier.io)
-
-### 2.0.0
-* Upgraded to webpack 4
-* Upgraded to React 16.3
-* Removed extract-css-chunks plugin in favor of extract-text-webpack-plugin,
-since the former is not supported with webpack 4 anymore
-* Removes extract plugins for styles in development, to improve hot-reloading 
+For a detailed changelog, please refer to the [CHANGELOG.md](CHANGELOG.md). 
 
 ## Planned features
 The following features are planned for future upgrades of the template.
