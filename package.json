@@ -7,9 +7,9 @@
     "start": "cross-env NODE_ENV=development babel-node src/index",
     "watch": "cross-env NODE_ENV=development nodemon src/index",
     "build": "npm-run-all -p build:client build:server build:node",
-    "build:client": "cross-env NODE_ENV=production webpack -p --config webpack/client.production.js",
-    "build:server": "cross-env NODE_ENV=production webpack -p --config webpack/server.production.js",
-    "build:node": "cross-env NODE_ENV=production webpack -p --config webpack/node.production.js",
+    "build:client": "cross-env NODE_ENV=production webpack --config webpack/client/prod.js",
+    "build:server": "cross-env NODE_ENV=production webpack --config webpack/server/prod.js",
+    "build:node": "cross-env NODE_ENV=production webpack --config webpack/node.js",
     "test": "jest",
     "lint": "eslint src/**/*.js"
   },
@@ -34,6 +34,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.4.3",
     "copy-webpack-plugin": "^5.0.2",
+    "core-js": "^3.0.1",
     "express": "^4.16.4",
     "helmet": "^3.16.0",
     "react": "^16.8.6",
@@ -45,7 +46,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
-    "@babel/node": "^7.0.0",
+    "@babel/node": "^7.2.2",
     "@babel/plugin-proposal-class-properties": "^7.4.0",
     "@babel/plugin-proposal-decorators": "^7.4.0",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",

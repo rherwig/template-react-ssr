@@ -4,7 +4,9 @@
       "targets": {
         "node": "current",
         "browsers": ["last 2 versions", "IE 11"]
-       }
+      },
+      "useBuiltIns": "usage",
+      "corejs": "3"
     }],
     "@babel/preset-react"
   ],

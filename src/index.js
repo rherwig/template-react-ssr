@@ -1,6 +1,5 @@
 import express from 'express';
 import helmet from 'helmet';
-import shrinkRay from 'shrink-ray';
 import { join } from 'path';
 import { log } from 'winston';
 
@@ -11,8 +10,8 @@ import { log } from 'winston';
  * @param app Express app
  */
 const configureDevelopment = (app) => {
-    const clientConfig = require('../webpack/client');
-    const serverConfig = require('../webpack/server');
+    const clientConfig = require('../webpack/client/dev');
+    const serverConfig = require('../webpack/server/dev');
     const { publicPath, path } = clientConfig.output;
 
     const multiCompiler = require('webpack')([clientConfig, serverConfig]);
@@ -54,9 +53,6 @@ const isDevelopment = process.env.NODE_ENV === 'development';
 
 log('info', `Configuring server for environment: ${process.env.NODE_ENV}...`);
 app.use(helmet());
-app.use(shrinkRay({
-    filter: () => !isDevelopment,
-}));
 app.set('port', process.env.PORT || 3000);
 
 if (isDevelopment) {

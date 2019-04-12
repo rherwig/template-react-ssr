@@ -4,11 +4,14 @@ const WebpackBar = require('webpackbar');
 module.exports = {
     output: {
         path: join(__dirname, '../public/assets'),
-        publicPath: '/'
+        publicPath: '/',
     },
     resolve: {
         extensions: ['.js'],
-        modules: [join(__dirname, '../node_modules'), join(__dirname, '../src')]
+        modules: [
+            join(__dirname, '../node_modules'),
+            join(__dirname, '../src')
+        ],
     },
     module: {
         rules: [
@@ -16,10 +19,10 @@ module.exports = {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: 'babel-loader'
-            }
-        ]
+            },
+        ],
     },
     plugins: [
-        new WebpackBar()
-    ]
+        new WebpackBar(),
+    ],
 };
